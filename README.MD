@@ -1,4 +1,4 @@
-### PostgresSql 
+# PostgresSql 
 
 ---
 
@@ -8,7 +8,7 @@ In PostgreSQL, the ALTER TABLE statement is a powerful and essential tool that a
 
 ---
 
-# Adding a New Column
+## Adding a New Column
 
 To add a new column to an existing table, use the 'ADD COLUMN' action. This is particularly useful when we need to store additional data in our table.
 
@@ -82,4 +82,122 @@ UPDATE employees
 SET department = 'General'
 WHERE department IS NULL;
 
+```
+
+## Dropping a Column 
+
+```
+ALTER TABLE table_name
+DROP COLUMN column_name [CASCADE | RESTRICT];
+
+```
+
+## Drop a simple column
+
+```
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    salary NUMERIC(10,2),
+    department VARCHAR(50)
+);
+
+```
+
+```
+ALTER TABLE employees
+DROP COLUMN department;
+```
+1. Drop multiple columns at once
+
+```
+ALTER TABLE employeeinfo
+ DROP COLUMN salary,
+ DROP COLUMN name;
+
+```
+
+2. Drop column with dependent objects
+
+If a column has dependencies (like foreign keys, views, or constraints), PostgreSQL will prevent dropping it by default. You can use CASCADE to remove dependencies automatically:
+
+```
+ ALTER TABLE employeeinfo
+ DROP COLUMN department_id  CASCADE;
+```
+
+3. Drop column safely with RESTRICT
+
+- If the column is used elsewhere (like in a foreign key), PostgreSQL will stop the operation
+- This is safer when you want to avoid accidentally breaking dependencies.
+
+```
+ALTER TABLE employees
+DROP COLUMN department_id RESTRICT
+
+```
+
+---
+
+# Rename
+
+```
+ALTER TABLE table_name
+RENAME COLUMN old_column_name TO new_column_name
+
+```
+
+1. Rename a simple column 
+
+```
+CREATE TABLE renametable(
+  id SERIAL PRIMARY key,
+  full_name VARCHAR(100),
+  salary NUMERIC(10,2)
+)
+
+ALTER TABLE renametable
+Rename COLUMN full_name TO name;
+
+```
+
+---
+
+## Changing the Default Value of a Column 
+
+```
+CREATE TABLE defaultCheck(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    status VARCHAR(20) DEFAULT 'active'
+);
+
+ALTER TABLE defaultCheck
+ALTER COLUMN status SET DEFAULT 'pending'
+```
+
+1. Change numeric default 
+
+```
+ALTER TABLE renametable
+ALTER COLUMN salary SET DEFAULT 2000;
+
+```
+
+2. Remove a default value 
+
+```
+ALTER TABLE defaultCheck
+ALTER COLUMN status DROP DEFAULT;
+
+```
+
+3. Using function as default 
+
+```
+ALTER TABLE defaultCheck
+ALTER COLUMN hire_date SET DEFAULT CURRENT_DATE;
+
+ALTER TABLE defaultCheck
+ALTER COLUMN hire_date SET DEFAULT NOW();
 ```

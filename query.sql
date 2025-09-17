@@ -4,7 +4,8 @@ CREATE DATABASE postgresSql;
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
-    salary NUMERIC(10,2)
+    salary NUMERIC(10,2),
+
 );
 
 ALTER TABLE employees
@@ -32,4 +33,45 @@ ADD COLUMN department_id INT REFERENCES departments(id);
 UPDATE employees
 SET department = 'General'
 WHERE department IS NULL;
+
+
+-- Drop column
+
+CREATE TABLE employeeInfo (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  salary NUMERIC(10, 2),
+  department VARCHAR(50)
+)
+
+
+ALTER TABLE employeeInfo
+DROP COLUMN department;
+
+
+-- multiple COLUMN
+ ALTER TABLE employeeinfo
+ DROP COLUMN salary,
+ DROP COLUMN name;
+
+ALTER TABLE employeeinfo
+ADD COLUMN department_id INT REFERENCES departments(id); 
+
+
+ ALTER TABLE employeeinfo
+ DROP COLUMN department_id  CASCADE;
+
+ ALTER TABLE employeeinfo
+DROP COLUMN department_id RESTRICT;
+
+
+--- Column Rename
+CREATE TABLE renametable(
+  id SERIAL PRIMARY key,
+  full_name VARCHAR(100),
+  salary NUMERIC(10,2)
+)
+
+ALTER TABLE renametable
+Rename COLUMN full_name TO name;
 

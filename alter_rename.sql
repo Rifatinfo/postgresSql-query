@@ -1,0 +1,21 @@
+
+CREATE TABLE defaultCheck(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    status VARCHAR(20) DEFAULT 'active'
+);
+
+ALTER TABLE defaultCheck
+ALTER COLUMN status SET DEFAULT 'pending'
+
+ALTER TABLE defaultCheck
+ALTER COLUMN salary SET DEFAULT 2000;
+
+ALTER TABLE defaultCheck
+ALTER COLUMN status DROP DEFAULT;
+
+ALTER TABLE defaultCheck
+ALTER COLUMN hire_date SET DEFAULT CURRENT_DATE;
+
+ALTER TABLE defaultCheck
+ALTER COLUMN hire_date SET DEFAULT NOW();
