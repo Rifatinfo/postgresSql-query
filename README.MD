@@ -201,3 +201,53 @@ ALTER COLUMN hire_date SET DEFAULT CURRENT_DATE;
 ALTER TABLE defaultCheck
 ALTER COLUMN hire_date SET DEFAULT NOW();
 ```
+
+## Changing NOT NULL Constraint 
+
+# A NOT NULL constraint ensures that a column cannot have NULL values.
+
+```
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(100)
+)
+
+ALTER TABLE users
+ALTER COLUMN email SET NOT  NULL;
+
+UPDATE users
+SET email = 'default@example'
+WHERE email IS NULL;
+
+ALTER TABLE users
+ALTER COLUMN name DROP NOT NULL;
+
+```
+
+---
+
+## Adding a CHECK Constraint 
+
+```
+CREATE TABLE usercheck (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(100),
+  age INT,
+  CHECK (age >= 18)
+)
+
+ALTER TABLE usercheck
+ADD CONSTRAINT check_age CHECK (age >= 18);
+
+
+ALTER TABLE usercheck
+ADD COLUMN salary NUMERIC(10,2) CHECK (salary > 0);
+
+```
+
+---
+
+## Adding a General Constraint 
+

@@ -75,3 +75,36 @@ CREATE TABLE renametable(
 ALTER TABLE renametable
 Rename COLUMN full_name TO name;
 
+
+-- not null
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(100)
+)
+
+ALTER TABLE users
+ALTER COLUMN email SET NOT  NULL;
+
+UPDATE users
+SET email = 'default@example'
+WHERE email IS NULL;
+
+ALTER TABLE users
+ALTER COLUMN name DROP NOT NULL;
+
+
+CREATE TABLE usercheck (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(100),
+  age INT,
+  CHECK (age >= 18)
+)
+
+ALTER TABLE usercheck
+ADD CONSTRAINT check_age CHECK (age >= 18);
+
+
+ALTER TABLE usercheck
+ADD COLUMN salary NUMERIC(10,2) CHECK (salary > 0);
