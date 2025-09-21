@@ -249,9 +249,9 @@ ADD COLUMN salary NUMERIC(10,2) CHECK (salary > 0);
 
 ---
 
-## Adding a General Constraint 
+# Adding a General Constraint 
 
-# Adding a primary key 
+## Adding a primary key 
 
 ```
 ALTER TABLE links
@@ -259,7 +259,7 @@ ADD CONSTRAINT link_id_pk PRIMARY KEY(link_id);
 
 ```
 
-# Adding a unique constraint
+## Adding a unique constraint
 
 ```
 ALTER TABLE links
@@ -268,7 +268,7 @@ ADD CONSTRAINT users_email_unique UNIQUE (email);
 
 ```
 
-# Adding a Foreign key
+## Adding a Foreign key
 
 ```
 CREATE TABLE users (
@@ -294,3 +294,10 @@ ADD CONSTRAINT orders_users_fk
 FOREIGN KEY (user_id) REFERENCES users(id);
 
 ```
+
+## Rename a table
+
+```
+ALTER TABLE links RENAME to user_links
+
+``` 

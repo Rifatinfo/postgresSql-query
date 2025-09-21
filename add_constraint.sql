@@ -17,3 +17,4 @@ ADD COLUMN email VARCHAR(200),
 ADD CONSTRAINT users_email_unique UNIQUE (email);
 
 
+ALTER TABLE links RENAME to user_links;
