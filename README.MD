@@ -251,3 +251,46 @@ ADD COLUMN salary NUMERIC(10,2) CHECK (salary > 0);
 
 ## Adding a General Constraint 
 
+# Adding a primary key 
+
+```
+ALTER TABLE links
+ADD CONSTRAINT link_id_pk PRIMARY KEY(link_id);
+
+```
+
+# Adding a unique constraint
+
+```
+ALTER TABLE links
+ADD COLUMN email VARCHAR(200),
+ADD CONSTRAINT users_email_unique UNIQUE (email);
+
+```
+
+# Adding a Foreign key
+
+```
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL
+);
+
+````
+
+```
+CREATE TABLE links (
+    id SERIAL PRIMARY KEY,
+    url VARCHAR(255) NOT NULL,
+    user_id INT
+);
+
+```
+
+```
+ALTER TABLE links
+ADD CONSTRAINT orders_users_fk
+FOREIGN KEY (user_id) REFERENCES users(id);
+
+```
